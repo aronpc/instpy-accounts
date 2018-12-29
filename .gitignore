@@ -1,0 +1,7 @@
+# Ignore everything:
+accounts/*
+
+# Except for the themes directories:
+
+!accounts/acc-example
+!accounts/acc-example/logs/acc-example

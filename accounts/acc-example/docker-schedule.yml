@@ -1,0 +1,22 @@
+version: '3'
+services:
+  instapy-acc-example-schedule:
+    container_name: instapy-acc-example-schedule
+    command: ["./wait-for-selenium.sh", "http://selenium-instapy-acc-example-schedule:4444/wd/hub", "--", "python", "/personal/instapy-schedule.py"]
+    environment:
+      - PYTHONUNBUFFERED=0
+      - SELENIUM_URL=selenium-instapy-acc-example-schedule
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    depends_on:
+      - selenium-instapy-acc-example-schedule
+    volumes:
+      - ./../logs:/code/logs
+      - ./../../InstaPy:/code
+      - ./:/personal
+  selenium-instapy-acc-example-schedule:
+    container_name: instapy-selenium-chrome-instapy-acc-example-schedule
+    image: selenium/standalone-chrome
+    shm_size: 512M
